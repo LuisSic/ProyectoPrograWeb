@@ -1,0 +1,47 @@
+<br><br><br>
+<form name="AgregarPrueba" id="Agregar" class="mt-5">
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="inputTitulo">Titulo del Juego</label>
+            <input type="text" class="form-control" id="inputTitulo" placeholder="Titulo">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputPlataformo">Plataforma</label>
+            <input type="text" class="form-control" id="inputPlataforma" placeholder="Plataforma">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputEdicion">Edicion</label>
+            <input type="text" class="form-control" id="inputEdicion" placeholder="Edicion">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputDescripcion">Descripcion</label>
+          <input type="text" class="form-control" id="inputDescripcion" placeholder="Descipcion">
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputDesarrollo">Desarrollado Por</label>
+                <select id="inputDesarrollo" class="form-control">
+                  <option>Electronic Arts</option>
+                  <option>Square Enix</option>
+                  <option>Nintendo</option>
+                  <option>Sony</option>
+                  <option>Capcom</option>
+                  <option>Microsoft Studios</option>
+                </select>
+              </div>
+          <div class="form-group col-md-6">
+            <label for="inputClasificacion">Clasificacion</label>
+            <select id="inputClasificacion" class="form-control">
+              <option>Todos</option>
+              <option>Todos +10</option>
+              <option>Adolecentes</option>
+              <option>Maduro</option>
+              <option>Adulto Unicamente</option>
+              <option>Clasificacion Pendiente</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" onclick="agregar()">Guardar</button>
+        <a name="prueba"></a>
+</form>
