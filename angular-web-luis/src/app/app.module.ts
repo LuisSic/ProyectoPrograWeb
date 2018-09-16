@@ -5,6 +5,7 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AddvideogameComponent } from './addvideogame/addvideogame.component';
 import { CatalogoComponent } from './catalogo/catalogo.component';
+import { ModalDialogModule } from 'ngx-modal-dialog';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { CatalogoComponent } from './catalogo/catalogo.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ModalDialogModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

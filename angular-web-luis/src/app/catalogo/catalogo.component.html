@@ -14,7 +14,18 @@
         </div>
         <div class="col-8">
           <div class="tab-content" id="nav-tabContent">
-               <div *ngFor="let videogame of videogames" class="tab-pane fade" id="list-{{videogame.id}}" role="tabpanel">{{videogame.description}}</div>
+               <div *ngFor="let videogame of videogames" class="tab-pane fade" id="list-{{videogame.id}}" role="tabpanel">
+                  {{videogame.description}}
+                  <br>
+                  <button type="button" class="btn btn-primary" (click)="openPromptModal()">
+                    Eliminar
+                  </button>
+                  <button type="button" class="btn btn-primary">
+                    Editar
+                  </button>
+               </div>
+
+
             <!--
                 <div class="tab-pane fade" id="list-2" role="tabpanel">prueba2</div>
             <div class="tab-pane fade" id="list-3" role="tabpanel">prueba3</div>
