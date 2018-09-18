@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import {VIDEOGAMES} from '../mock-videogame';
 import { ModalDialogService, SimpleModalComponent } from 'ngx-modal-dialog';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-catalogo',
@@ -8,9 +9,11 @@ import { ModalDialogService, SimpleModalComponent } from 'ngx-modal-dialog';
   styleUrls: ['./catalogo.component.css']
 })
 export class CatalogoComponent implements OnInit {
-  constructor(private modalDialogService: ModalDialogService, private viewContainer: ViewContainerRef) {}
-  videogames = VIDEOGAMES;
+  constructor(private modalDialogService: ModalDialogService, private viewContainer: ViewContainerRef,
+    private dataService: AppComponent) {}
+  videogames = this.dataService.obtenerlocalstorate();
   ngOnInit() {
+
   }
   openSimpleModal() {
     this.modalDialogService.openDialog(this.viewContainer, {

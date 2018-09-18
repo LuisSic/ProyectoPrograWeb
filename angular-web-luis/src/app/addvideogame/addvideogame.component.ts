@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Videogame } from '../videogame';
 
 @Component({
   selector: 'app-addvideogame',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./addvideogame.component.css']
 })
 export class AddvideogameComponent implements OnInit {
-
+  @Input() videogame = Videogame;
   constructor() { }
 
   ngOnInit() {
