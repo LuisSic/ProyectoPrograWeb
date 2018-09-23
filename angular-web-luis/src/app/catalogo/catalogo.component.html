@@ -3,7 +3,7 @@
       <div class="row">
         <div class="col-4">
           <div class="list-group" id="list-tab" role="tablist">
-              <a *ngFor="let videogame of videogames" class="list-group-item list-group-item-action" id="list-{{videogame.id}}-list" data-toggle="list" href="#list-{{videogame.id}}" role="tab">{{videogame.name}}</a>
+              <a *ngFor="let key of keys" class="list-group-item list-group-item-action" id="list-{{videogames[key].id}}-list" data-toggle="list" href="#list-{{videogames[key].id}}" role="tab">{{videogames[key].titulo_juego}}</a>
             <!--
                <a class="list-group-item list-group-item-action" id="list-2-list" data-toggle="list" href="#list-2" role="tab" >Profile</a>
             <a class="list-group-item list-group-item-action" id="list-3-list" data-toggle="list" href="#list-3" role="tab">Messages</a>
@@ -14,18 +14,18 @@
         </div>
         <div class="col-8">
           <div class="tab-content" id="nav-tabContent">
-               <div *ngFor="let videogame of videogames" class="tab-pane fade" id="list-{{videogame.id}}" role="tabpanel">
-                  {{videogame.description}}
-                  <br>
-                  <button type="button" class="btn btn-primary" (click)="openPromptModal()">
+               <div *ngFor="let key of keys" class="tab-pane fade" id="list-{{videogames[key].id}}" role="tabpanel">
+                  Descripción: {{videogames[key].descripcion}}<br>
+                  Edición: {{videogames[key].edicion}}<br>
+                  Desarrollador: {{videogames[key].desarrolladora}}<br>
+                  Clasificación: {{videogames[key].clasificacion}}<br>
+                  <button type="button" class="m-3 mx-3 btn btn-outline-danger" (click)="openPromptModal(videogames[key])">
                     Eliminar
                   </button>
-                  <button type="button" class="btn btn-primary">
+                  <button type="button" class="m-3 btn btn-outline-success" (click)="Actualizar(videogames[key])" routerLink="/addvideogame">
                     Editar
                   </button>
                </div>
-
-
             <!--
                 <div class="tab-pane fade" id="list-2" role="tabpanel">prueba2</div>
             <div class="tab-pane fade" id="list-3" role="tabpanel">prueba3</div>

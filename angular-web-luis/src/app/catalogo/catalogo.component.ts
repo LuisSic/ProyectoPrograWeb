@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
-import {VIDEOGAMES} from '../mock-videogame';
+import {DataService} from '../data.service';
 import { ModalDialogService, SimpleModalComponent } from 'ngx-modal-dialog';
 import { AppComponent } from '../app.component';
+import { Videogame } from '../videogame';
 
 @Component({
   selector: 'app-catalogo',
@@ -10,10 +11,15 @@ import { AppComponent } from '../app.component';
 })
 export class CatalogoComponent implements OnInit {
   constructor(private modalDialogService: ModalDialogService, private viewContainer: ViewContainerRef,
-    private dataService: AppComponent) {}
-  videogames = this.dataService.obtenerlocalstorate();
+    private dataservice: DataService) {}
+  videogames = this.dataservice.getVideogames();
+  keys = Object.keys(this.videogames);
   ngOnInit() {
 
+  }
+  Actualizar(videogame: Videogame) {
+    console.log('Objeto para actualizar', videogame);
+    this.dataservice.ActualizarTrue(videogame);
   }
   openSimpleModal() {
     this.modalDialogService.openDialog(this.viewContainer, {
@@ -46,7 +52,7 @@ export class CatalogoComponent implements OnInit {
     });
   }
 
-  openPromptModal() {
+  openPromptModal(videogame: Videogame) {
     this.modalDialogService.openDialog(this.viewContainer, {
       title: 'Eliminar videojuego',
       childComponent: SimpleModalComponent,
@@ -70,7 +76,10 @@ export class CatalogoComponent implements OnInit {
           text: 'Aceptar',
           buttonClass: 'btn btn-success',
           onAction: () => {
-            alert('As you can see, I will not close this dialog');
+              this.dataservice.removeVideogame(videogame);
+              this.videogames = this.dataservice.getVideogames();
+              this.keys = Object.keys(this.videogames);
+              alert('El juego se ha eliminado permanentemente');
           }
         }
       ]

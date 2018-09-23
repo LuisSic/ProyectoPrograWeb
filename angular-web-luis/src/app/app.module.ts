@@ -6,18 +6,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AddvideogameComponent } from './addvideogame/addvideogame.component';
 import { CatalogoComponent } from './catalogo/catalogo.component';
 import { ModalDialogModule } from 'ngx-modal-dialog';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     CarouselComponent,
     AddvideogameComponent,
-    CatalogoComponent
+    CatalogoComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ModalDialogModule.forRoot()
+    ModalDialogModule.forRoot(),
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

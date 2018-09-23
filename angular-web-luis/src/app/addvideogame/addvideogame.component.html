@@ -1,27 +1,80 @@
 <br><br><br>
+<div class="row">
+    <div class="col-8">
+          <form name="AgregarPrueba" id="Agregar" class="mt-5">
+        <div class="form-group">
+             <label for="inputTitulo">Titulo del Juego</label>
+              <input type="text" class="form-control" placeholder="Titulo" name="titulo" [(ngModel)]="titulo">
+        </div>
+        <div class = "form-group">
+              <label for="inputDescripcion">Descripcion</label>
+              <input type="text" class="form-control" id="inputDescripcion" placeholder="Descipcion" name="descripcion" [(ngModel)]="descripcion">
+        </div>
+        <div class ="form-row">
+            <div class="form-group col-md-4">
+              <label for="inputEdicion">Edicion</label>
+              <input type="text" class="form-control" id="inputEdicion" placeholder="Edicion" name="edicion" [(ngModel)]="edicion">
+            </div>
+            <div class="form-group col-md-4">
+            <label for="inputPlataformo">Plataforma</label>
+            <input type="text" class="form-control" placeholder="Plataforma" name="plataforma" [(ngModel)]="plataforma">
+          </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="inputDesarrollo">Desarrollado Por</label>
+                <select id="inputDesarrollo" class="form-control" name="desarrollado" [(ngModel)]="desarrollado">
+                  <option>Electronic Arts</option>
+                  <option>Square Enix</option>
+                  <option>Nintendo</option>
+                  <option>Sony</option>
+                  <option>Capcom</option>
+                  <option>Microsoft Studios</option>
+                </select>
+              </div>
+          <div class="form-group col-md-4">
+            <label for="inputClasificacion">Clasificacion</label>
+            <select id="inputClasificacion" class="form-control" name="clasificacion" [(ngModel)]="clasificacion">
+              <option>Todos</option>
+              <option>Todos +10</option>
+              <option>Adolecentes</option>
+              <option>Maduro</option>
+              <option>Adulto Unicamente</option>
+              <option>Clasificacion Pendiente</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="addVideogame()">Guardar</button>
+</form>
+    </div>
+    <div class="col-4">
+      <img src="https://cdn.dribbble.com/users/9679/screenshots/2529877/zombie_hand-01.jpg" style="margin-top: 80px" width="400" height="350">
+    </div>
+</div>
+<!--
 <form name="AgregarPrueba" id="Agregar" class="mt-5">
         <div class="form-row">
           <div class="form-group col-md-4">
             <label for="inputTitulo">Titulo del Juego</label>
-            <input type="text" class="form-control" id="inputTitulo" placeholder="Titulo">
+            <input type="text" class="form-control" placeholder="Titulo" name="titulo" [(ngModel)]="titulo">
           </div>
           <div class="form-group col-md-4">
             <label for="inputPlataformo">Plataforma</label>
-            <input type="text" class="form-control" id="inputPlataforma" placeholder="Plataforma">
+            <input type="text" class="form-control" placeholder="Plataforma" name="plataforma" [(ngModel)]="plataforma">
           </div>
           <div class="form-group col-md-4">
             <label for="inputEdicion">Edicion</label>
-            <input type="text" class="form-control" id="inputEdicion" placeholder="Edicion">
+            <input type="text" class="form-control" id="inputEdicion" placeholder="Edicion" name="edicion" [(ngModel)]="edicion">
           </div>
         </div>
         <div class="form-group">
           <label for="inputDescripcion">Descripcion</label>
-          <input type="text" class="form-control" id="inputDescripcion" placeholder="Descipcion">
+          <input type="text" class="form-control" id="inputDescripcion" placeholder="Descipcion" name="descripcion" [(ngModel)]="descripcion">
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputDesarrollo">Desarrollado Por</label>
-                <select id="inputDesarrollo" class="form-control">
+                <select id="inputDesarrollo" class="form-control" name="desarrollado" [(ngModel)]="desarrollado">
                   <option>Electronic Arts</option>
                   <option>Square Enix</option>
                   <option>Nintendo</option>
@@ -32,7 +85,7 @@
               </div>
           <div class="form-group col-md-6">
             <label for="inputClasificacion">Clasificacion</label>
-            <select id="inputClasificacion" class="form-control">
+            <select id="inputClasificacion" class="form-control" name="clasificacion" [(ngModel)]="clasificacion">
               <option>Todos</option>
               <option>Todos +10</option>
               <option>Adolecentes</option>
@@ -42,6 +95,8 @@
             </select>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary" onclick="agregar()">Guardar</button>
-        <a name="prueba"></a>
+        <button type="submit" class="btn btn-primary" (click)="addVideogame()">Guardar</button>
 </form>
+
+-->
+
