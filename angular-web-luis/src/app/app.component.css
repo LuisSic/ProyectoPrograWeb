@@ -3,5 +3,10 @@
     font-weight: bold;
     font-size: 150%;
   }
-
+  .container-fluid {
+    width: 100%;
+     padding: 0px;
+    margin-right: auto;
+    margin-left: auto;
+}
 

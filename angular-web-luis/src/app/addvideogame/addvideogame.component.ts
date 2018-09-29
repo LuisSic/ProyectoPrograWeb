@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { DataService } from '../data.service';
 import {Videogame} from '../videogame';
 import { Guid } from 'guid-typescript';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-addvideogame',
@@ -16,8 +17,8 @@ export class AddvideogameComponent implements OnInit {
   descripcion: string;
   desarrollado: string;
   clasificacion: string;
-
-  constructor(private dataservice: DataService) { }
+  url_imagen: string;
+  constructor(private dataservice: DataService, private location: Location) { }
 
   ngOnInit() {
     console.log('Hizo la validacion', this.dataservice.esActualizar);
@@ -30,6 +31,16 @@ export class AddvideogameComponent implements OnInit {
       this.descripcion = this.dataservice.videogameActualizar.descripcion;
       this.desarrollado = this.dataservice.videogameActualizar.desarrolladora;
       this.clasificacion = this.dataservice.videogameActualizar.clasificacion;
+      this.url_imagen = this.dataservice.videogameActualizar.url_imagen;
+      this.dataservice.esActualizar = false;
+    } else {
+      this.titulo = '';
+      this.plataforma = '';
+      this.edicion = '';
+      this.descripcion = '';
+      this.desarrollado = '';
+      this.clasificacion = '';
+      this.url_imagen = '';
     }
   }
   addVideogame() {
@@ -46,7 +57,8 @@ export class AddvideogameComponent implements OnInit {
       edicion: this.edicion,
       descripcion: this.descripcion,
       desarrolladora: this.desarrollado,
-      clasificacion: this.clasificacion
+      clasificacion: this.clasificacion,
+      url_imagen: this.url_imagen
     };
     this.dataservice.addVideogame(this.videogame);
     this.dataservice.esActualizar = false;
@@ -57,5 +69,17 @@ export class AddvideogameComponent implements OnInit {
     this.descripcion = '';
     this.desarrollado = '';
     this.clasificacion = '';
+    this.url_imagen = '';
+  }
+  goBack(): void {
+    this.dataservice.esActualizar = false;
+    this.titulo = '';
+    this.plataforma = '';
+    this.edicion = '';
+    this.descripcion = '';
+    this.desarrollado = '';
+    this.clasificacion = '';
+    this.url_imagen = '';
+    this.location.back();
   }
 }

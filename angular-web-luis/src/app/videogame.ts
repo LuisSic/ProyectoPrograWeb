@@ -8,4 +8,5 @@ export class Videogame {
   descripcion: string;
   desarrolladora: string;
   clasificacion: string;
+  url_imagen: string;
 }

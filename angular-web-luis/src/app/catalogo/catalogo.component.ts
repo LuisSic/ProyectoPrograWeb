@@ -64,8 +64,8 @@ export class CatalogoComponent implements OnInit {
       },
       actionButtons: [
         {
-          text: 'Cancelar',
-          buttonClass: 'btn btn-success',
+          text: 'Salir',
+          buttonClass: 'btn btn-outline-secondary',
           onAction: () => new Promise((resolve: any) => {
             setTimeout(() => {
               resolve();
@@ -74,7 +74,7 @@ export class CatalogoComponent implements OnInit {
         },
         {
           text: 'Aceptar',
-          buttonClass: 'btn btn-success',
+          buttonClass: 'btn btn-outline-danger',
           onAction: () => {
               this.dataservice.removeVideogame(videogame);
               this.videogames = this.dataservice.getVideogames();
