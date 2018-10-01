@@ -18,13 +18,12 @@ export class AddvideogameComponent implements OnInit {
   desarrollado: string;
   clasificacion: string;
   url_imagen: string;
+  bandera: boolean;
   constructor(private dataservice: DataService, private location: Location) { }
 
   ngOnInit() {
-    console.log('Hizo la validacion', this.dataservice.esActualizar);
-    console.log('Objeto a actualizar', this.dataservice.videogameActualizar);
+    this.bandera = this.dataservice.esActualizar;
     if (this.dataservice.esActualizar === true) {
-      console.log('Entro al If ACTUALIZAR');
       this.titulo = this.dataservice.videogameActualizar.titulo_juego;
       this.plataforma = this.dataservice.videogameActualizar.plataforma;
       this.edicion = this.dataservice.videogameActualizar.edicion;
@@ -43,15 +42,31 @@ export class AddvideogameComponent implements OnInit {
       this.url_imagen = '';
     }
   }
-  addVideogame() {
-    let idVideogame;
-    if (this.dataservice.esActualizar === true) {
-      idVideogame = this.dataservice.videogameActualizar.id;
-    } else {
-      idVideogame = Guid.raw();
-    }
+  updateVideogame() {
     this.videogame = {
-      id : idVideogame,
+      id :  this.dataservice.videogameActualizar.id,
+      titulo_juego: this.titulo,
+      plataforma: this.plataforma,
+      edicion: this.edicion,
+      descripcion: this.descripcion,
+      desarrolladora: this.desarrollado,
+      clasificacion: this.clasificacion,
+      url_imagen: this.url_imagen
+    };
+    this.dataservice.updateVideogame(this.videogame);
+    this.dataservice.esActualizar = false;
+    console.log(this.videogame.id, this.videogame.titulo_juego);
+    this.titulo = '';
+    this.plataforma = '';
+    this.edicion = '';
+    this.descripcion = '';
+    this.desarrollado = '';
+    this.clasificacion = '';
+    this.url_imagen = '';
+  }
+  addVideogame() {
+    this.videogame = {
+      id : Guid.raw(),
       titulo_juego: this.titulo,
       plataforma: this.plataforma,
       edicion: this.edicion,

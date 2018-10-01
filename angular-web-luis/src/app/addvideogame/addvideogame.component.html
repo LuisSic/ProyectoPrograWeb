@@ -48,8 +48,14 @@
             </select>
           </div>
         </div>
-        <button type="submit" class="m-3 btn btn-outline-primary" (click)="addVideogame()">Guardar</button>
-        <button class="btn btn-outline-primary" (click)="goBack()">Regresar</button>
+        <div *ngIf="bandera">
+          <button type="submit" class="m-3 btn btn-outline-primary" (click)="updateVideogame()">Actualizar</button>
+           <button class="btn btn-outline-primary" (click)="goBack()">Regresar</button>
+        </div>
+        <div *ngIf="!bandera">
+          <button type="submit" class="m-3 btn btn-outline-primary" (click)="addVideogame()">Guardar</button>
+           <button class="btn btn-outline-primary" (click)="goBack()">Regresar</button>
+        </div>
 </form>
     </div>
     <div class="col-4">

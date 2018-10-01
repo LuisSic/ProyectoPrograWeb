@@ -48,7 +48,7 @@ export class DataService {
     localStorage.setItem( 'videogames' , JSON.stringify(this.videogames));
   }
   updateVideogame (videogame: Videogame): void {
-    this.videogames[videogame.id.toString()] = videogame;
+    this.videogames[videogame.id] = videogame;
     localStorage.setItem( 'videogames' , JSON.stringify(this.videogames));
   }
 }
