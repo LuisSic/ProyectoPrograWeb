@@ -1,54 +1,94 @@
+import axios from 'axios';
+import { AxiosInstance } from 'axios';
 import { Injectable } from '@angular/core';
 import {Videogame} from './videogame';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  videogames = {};
+  videogames;
   esActualizar = false;
   videogameActualizar;
+  private axiosClient: AxiosInstance;
   constructor() {
     this.videogames = {};
+    this.axiosClient = axios.create({
+      baseURL: 'http://localhost:3000/videogame',
+      timeout: 1000,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json'
+      }
+    });
+  }
+  getVideogames () {
+    const promise = new Promise((resolve, reject) => {
+      let dictionary;
+      dictionary = {};
+      this.axiosClient.get('/all')
+      .then(function (response) {
+        response.data.forEach(element => {
+          dictionary[element._id] = element;
+        });
+        resolve(dictionary);
+      })
+      .catch(function (error) {
+        reject(error.response.data.message);
+      });
+    });
+    return promise;
   }
 
-  getVideogames (): {} {
-    if (localStorage.getItem('videogames') === null) {
-      this.videogames = {};
-    } else {
-
-      this.videogames =  JSON.parse(localStorage.getItem('videogames'));
-    }
-    return this.videogames;
+  ActualizarTrue (videogame: String) {
+    const promise = new Promise((resolve, reject) => {
+      this.axiosClient.get('/search/' + videogame)
+      .then(function (response) {
+        resolve(response.data);
+      })
+      .catch(function (error) {
+        reject(error.response.data.message);
+      });
+    });
+    return promise;
   }
 
-  ActualizarTrue (videogame: Videogame): void {
-    this.esActualizar = true;
-    this.videogameActualizar = videogame;
+  addVideogame (videogame): void {
+    this.axiosClient.post('/SaveVideogame', JSON.stringify(videogame))
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error.response.data.message);
+    });
   }
 
-  addVideogame (videogame: Videogame): void {
-   this.videogames[videogame.id] = videogame;
-    let videogames;
-    if (localStorage.getItem('videogames') === null) {
-      videogames = {};
-      videogames[videogame.id] = videogame;
-      localStorage.setItem( 'videogames' , JSON.stringify(videogames));
-    } else {
-      videogames = JSON.parse(localStorage.getItem('videogames'));
-      videogames[videogame.id] = videogame;
-      localStorage.setItem( 'videogames' , JSON.stringify(videogames));
-    }
+  removeVideogame (videogame: Videogame) {
+    const promise = new Promise((resolve, reject) => {
+      this.axiosClient.delete('/' + videogame._id)
+      .then(function (response) {
+        console.log(response);
+        resolve(response);
+      })
+      .catch(function (error) {
+        // console.log(error.data);
+        reject(error.response.data.message);
+      });
+    });
+    return promise;
   }
 
-  removeVideogame (videogame: Videogame): void {
-    let id;
-    id = videogame.id;
-    delete this.videogames[id];
-    localStorage.setItem( 'videogames' , JSON.stringify(this.videogames));
-  }
-  updateVideogame (videogame: Videogame): void {
-    this.videogames[videogame.id] = videogame;
-    localStorage.setItem( 'videogames' , JSON.stringify(this.videogames));
+  updateVideogame (id: string, videogame): void {
+    this.axiosClient.put('/' + id, JSON.stringify(videogame))
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error.response.data.message);
+    });
   }
 }
+
+

@@ -3,6 +3,8 @@ import {DataService} from '../data.service';
 import { ModalDialogService, SimpleModalComponent } from 'ngx-modal-dialog';
 import { AppComponent } from '../app.component';
 import { Videogame } from '../videogame';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
 
 @Component({
   selector: 'app-catalogo',
@@ -12,14 +14,23 @@ import { Videogame } from '../videogame';
 export class CatalogoComponent implements OnInit {
   constructor(private modalDialogService: ModalDialogService, private viewContainer: ViewContainerRef,
     private dataservice: DataService) {}
-  videogames = this.dataservice.getVideogames();
-  keys = Object.keys(this.videogames);
+  videogames = {};
+  keys;
   ngOnInit() {
-
+    this.getAll();
   }
-  Actualizar(videogame: Videogame) {
-    console.log('Objeto para actualizar', videogame);
-    this.dataservice.ActualizarTrue(videogame);
+  getAll(): void {
+    this.dataservice.getVideogames().then( result => {
+      this.videogames = result;
+      this.keys = Object.keys(this.videogames);
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
+
+  Actualizar(videogameid: String) {
+    this.dataservice.esActualizar = true;
+    this.dataservice.videogameActualizar = videogameid;
   }
   openSimpleModal() {
     this.modalDialogService.openDialog(this.viewContainer, {
@@ -75,12 +86,14 @@ export class CatalogoComponent implements OnInit {
         {
           text: 'Aceptar',
           buttonClass: 'btn btn-outline-danger',
-          onAction: () => {
-              this.dataservice.removeVideogame(videogame);
-              this.videogames = this.dataservice.getVideogames();
-              this.keys = Object.keys(this.videogames);
-              alert('El juego se ha eliminado permanentemente');
-          }
+          onAction: () => new Promise((resolve: any) => {
+            this.dataservice.removeVideogame(videogame).then( result => {
+              this.getAll();
+              resolve();
+            }).catch((err) => {
+              console.log(err);
+            });
+          })
         }
       ]
     });

@@ -3,6 +3,7 @@ import { DataService } from '../data.service';
 import {Videogame} from '../videogame';
 import { Guid } from 'guid-typescript';
 import { Location } from '@angular/common';
+import { createUrlResolverWithoutPackagePrefix } from '@angular/compiler';
 
 @Component({
   selector: 'app-addvideogame',
@@ -11,6 +12,7 @@ import { Location } from '@angular/common';
 })
 export class AddvideogameComponent implements OnInit {
   videogame: Videogame;
+  id: string;
   titulo: string;
   plataforma: string;
   edicion: string;
@@ -24,14 +26,19 @@ export class AddvideogameComponent implements OnInit {
   ngOnInit() {
     this.bandera = this.dataservice.esActualizar;
     if (this.dataservice.esActualizar === true) {
-      this.titulo = this.dataservice.videogameActualizar.titulo_juego;
-      this.plataforma = this.dataservice.videogameActualizar.plataforma;
-      this.edicion = this.dataservice.videogameActualizar.edicion;
-      this.descripcion = this.dataservice.videogameActualizar.descripcion;
-      this.desarrollado = this.dataservice.videogameActualizar.desarrolladora;
-      this.clasificacion = this.dataservice.videogameActualizar.clasificacion;
-      this.url_imagen = this.dataservice.videogameActualizar.url_imagen;
-      this.dataservice.esActualizar = false;
+      this.dataservice.ActualizarTrue(this.dataservice.videogameActualizar).then( result => {
+        this.id = result[0]._id;
+        this.titulo = result[0].titulo_juego;
+        this.plataforma = result[0].plataforma;
+        this.edicion = result[0].edicion;
+        this.descripcion = result[0].descripcion;
+        this.desarrollado = result[0].desarrolladora;
+        this.clasificacion = result[0].clasificacion;
+        this.url_imagen = result[0].url_imagen;
+        this.dataservice.esActualizar = false;
+      }).catch((err) => {
+        console.log(err);
+      });
     } else {
       this.titulo = '';
       this.plataforma = '';
@@ -43,8 +50,7 @@ export class AddvideogameComponent implements OnInit {
     }
   }
   updateVideogame() {
-    this.videogame = {
-      id :  this.dataservice.videogameActualizar.id,
+    const obj = {
       titulo_juego: this.titulo,
       plataforma: this.plataforma,
       edicion: this.edicion,
@@ -53,9 +59,8 @@ export class AddvideogameComponent implements OnInit {
       clasificacion: this.clasificacion,
       url_imagen: this.url_imagen
     };
-    this.dataservice.updateVideogame(this.videogame);
+    this.dataservice.updateVideogame(this.id, obj);
     this.dataservice.esActualizar = false;
-    console.log(this.videogame.id, this.videogame.titulo_juego);
     this.titulo = '';
     this.plataforma = '';
     this.edicion = '';
@@ -65,8 +70,7 @@ export class AddvideogameComponent implements OnInit {
     this.url_imagen = '';
   }
   addVideogame() {
-    this.videogame = {
-      id : Guid.raw(),
+    const videogame = {
       titulo_juego: this.titulo,
       plataforma: this.plataforma,
       edicion: this.edicion,
@@ -75,9 +79,8 @@ export class AddvideogameComponent implements OnInit {
       clasificacion: this.clasificacion,
       url_imagen: this.url_imagen
     };
-    this.dataservice.addVideogame(this.videogame);
+    this.dataservice.addVideogame(videogame);
     this.dataservice.esActualizar = false;
-    console.log(this.videogame.id, this.videogame.titulo_juego);
     this.titulo = '';
     this.plataforma = '';
     this.edicion = '';
