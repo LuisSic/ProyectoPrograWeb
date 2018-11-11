@@ -1,9 +1,9 @@
-  .navbar-text{
+.navbar-text{
     color: azure;
     font-weight: bold;
     font-size: 150%;
   }
-  .container-fluid {
+.container-fluid {
     width: 100%;
      padding: 0px;
     margin-right: auto;

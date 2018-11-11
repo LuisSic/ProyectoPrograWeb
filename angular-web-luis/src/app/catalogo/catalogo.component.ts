@@ -3,8 +3,6 @@ import {DataService} from '../data.service';
 import { ModalDialogService, SimpleModalComponent } from 'ngx-modal-dialog';
 import { AppComponent } from '../app.component';
 import { Videogame } from '../videogame';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-
 
 @Component({
   selector: 'app-catalogo',
@@ -13,7 +11,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 })
 export class CatalogoComponent implements OnInit {
   constructor(private modalDialogService: ModalDialogService, private viewContainer: ViewContainerRef,
-    private dataservice: DataService) {}
+    private dataservice: DataService) { }
   videogames = {};
   keys;
   ngOnInit() {
@@ -91,7 +89,8 @@ export class CatalogoComponent implements OnInit {
               this.getAll();
               resolve();
             }).catch((err) => {
-              console.log(err);
+              console.log('Entre al catch del modal: ' + err);
+              resolve();
             });
           })
         }

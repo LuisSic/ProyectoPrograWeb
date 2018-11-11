@@ -28,7 +28,7 @@ export class DataService {
     const promise = new Promise((resolve, reject) => {
       let dictionary;
       dictionary = {};
-      this.axiosClient.get('/all')
+      this.axiosClient.get('/')
       .then(function (response) {
         response.data.forEach(element => {
           dictionary[element._id] = element;
@@ -44,7 +44,7 @@ export class DataService {
 
   ActualizarTrue (videogame: String) {
     const promise = new Promise((resolve, reject) => {
-      this.axiosClient.get('/search/' + videogame)
+      this.axiosClient.get('/' + videogame)
       .then(function (response) {
         resolve(response.data);
       })
@@ -56,7 +56,7 @@ export class DataService {
   }
 
   addVideogame (videogame): void {
-    this.axiosClient.post('/SaveVideogame', JSON.stringify(videogame))
+    this.axiosClient.post('/', JSON.stringify(videogame))
     .then(function (response) {
       console.log(response);
     })
