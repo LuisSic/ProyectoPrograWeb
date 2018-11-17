@@ -1,33 +1,33 @@
 <br><br>
 <div class="row">
     <div class="col-8">
-          <form name="AgregarPrueba" id="Agregar" class="mt-5">
+          <form name="AgregarPrueba" id="Agregar" class="mt-5" #formvalidation='ngForm'>
         <div class="form-group">
              <label for="inputTitulo">Titulo del Juego</label>
-              <input type="text" class="form-control" placeholder="Titulo" name="titulo" [(ngModel)]="titulo">
+              <input type="text" class="form-control" placeholder="Titulo" name="titulo" [(ngModel)]="titulo" required>
         </div>
         <div class = "form-group">
               <label for="inputDescripcion">Descripcion</label>
-              <input type="text" class="form-control" id="inputDescripcion" placeholder="Descipcion" name="descripcion" [(ngModel)]="descripcion">
+              <input type="text" class="form-control" id="inputDescripcion" placeholder="Descipcion" name="descripcion" [(ngModel)]="descripcion" required>
         </div>
         <div class = "form-group">
               <label for="inputUrlImagen">Url Imagen del Juego</label>
-              <input type="text" class="form-control" id="inputUrlImagen" placeholder="Url imagen" name="url_imagen" [(ngModel)]="url_imagen">
+              <input type="text" class="form-control" id="inputUrlImagen" placeholder="Url imagen" name="url_imagen" [(ngModel)]="url_imagen" required>
         </div>
         <div class ="form-row">
             <div class="form-group col-md-4">
               <label for="inputEdicion">Edicion</label>
-              <input type="text" class="form-control" id="inputEdicion" placeholder="Edicion" name="edicion" [(ngModel)]="edicion">
+              <input type="text" class="form-control" id="inputEdicion" placeholder="Edicion" name="edicion" [(ngModel)]="edicion" required>
             </div>
             <div class="form-group col-md-4">
             <label for="inputPlataformo">Plataforma</label>
-            <input type="text" class="form-control" placeholder="Plataforma" name="plataforma" [(ngModel)]="plataforma">
+            <input type="text" class="form-control" placeholder="Plataforma" name="plataforma" [(ngModel)]="plataforma" required>
           </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="inputDesarrollo">Desarrollado Por</label>
-                <select id="inputDesarrollo" class="form-control" name="desarrollado" [(ngModel)]="desarrollado">
+                <select id="inputDesarrollo" class="form-control" name="desarrollado" [(ngModel)]="desarrollado" required>
                   <option>Electronic Arts</option>
                   <option>Square Enix</option>
                   <option>Nintendo</option>
@@ -38,7 +38,7 @@
               </div>
           <div class="form-group col-md-4">
             <label for="inputClasificacion">Clasificacion</label>
-            <select id="inputClasificacion" class="form-control" name="clasificacion" [(ngModel)]="clasificacion">
+            <select id="inputClasificacion" class="form-control" name="clasificacion" [(ngModel)]="clasificacion" required>
               <option>Todos</option>
               <option>Todos +10</option>
               <option>Adolecentes</option>
@@ -49,17 +49,17 @@
           </div>
         </div>
         <div *ngIf="bandera">
-          <button type="submit" class="m-3 btn btn-outline-primary" (click)="updateVideogame()">Actualizar</button>
-           <button class="btn btn-outline-primary" (click)="goBack()">Regresar</button>
+          <button type="submit" class="m-3 btn btn-outline-primary" [disabled]='!formvalidation.form.valid' (click)="updateVideogame()">Actualizar</button>
+           <button class="btn btn-outline-secondary" (click)="goBack()">Regresar</button>
         </div>
         <div *ngIf="!bandera">
-          <button type="submit" class="m-3 btn btn-outline-primary" (click)="addVideogame()">Guardar</button>
-           <button class="btn btn-outline-primary" (click)="goBack()">Regresar</button>
+          <button type="submit" class="m-3 btn btn-outline-primary" [disabled]='!formvalidation.form.valid' (click)="addVideogame()">Guardar</button>
+           <button class="btn btn-outline-secondary" (click)="goBack()">Regresar</button>
         </div>
 </form>
     </div>
     <div class="col-4">
-      <img alt= "" [(src)]="url_imagen" style="margin-top: 80px" width="350" height="350">
+      <img alt= "" *ngIf="url_imagen" [(src)]="url_imagen" style="margin-top: 80px" width="350" height="350">
     </div>
 </div>
 <!--

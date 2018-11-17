@@ -36,7 +36,7 @@ export class DataService {
         resolve(dictionary);
       })
       .catch(function (error) {
-        reject(error.response.data.message);
+        reject(error);
       });
     });
     return promise;
