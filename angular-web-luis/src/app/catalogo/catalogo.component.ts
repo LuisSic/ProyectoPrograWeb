@@ -3,6 +3,7 @@ import {DataService} from '../data.service';
 import { ModalDialogService, SimpleModalComponent } from 'ngx-modal-dialog';
 import { AppComponent } from '../app.component';
 import { Videogame } from '../videogame';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-catalogo',
@@ -11,7 +12,7 @@ import { Videogame } from '../videogame';
 })
 export class CatalogoComponent implements OnInit {
   constructor(private modalDialogService: ModalDialogService, private viewContainer: ViewContainerRef,
-    private dataservice: DataService) { }
+    private dataservice: DataService,  private toasterService: MessageService) { }
   videogames = {};
   keys;
   ngOnInit() {
@@ -22,7 +23,7 @@ export class CatalogoComponent implements OnInit {
       this.videogames = result;
       this.keys = Object.keys(this.videogames);
     }).catch((err) => {
-      console.log(err);
+      this.toasterService.Error(err);
     });
   }
 
@@ -87,9 +88,10 @@ export class CatalogoComponent implements OnInit {
           onAction: () => new Promise((resolve: any) => {
             this.dataservice.removeVideogame(videogame).then( result => {
               this.getAll();
+              this.toasterService.Success(String(result));
               resolve();
             }).catch((err) => {
-              console.log('Entre al catch del modal: ' + err);
+              this.toasterService.Error(err);
               resolve();
             });
           })

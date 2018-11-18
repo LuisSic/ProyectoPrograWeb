@@ -7,6 +7,7 @@ import { AddvideogameComponent } from './addvideogame/addvideogame.component';
 import { CatalogoComponent } from './catalogo/catalogo.component';
 import { ModalDialogModule } from 'ngx-modal-dialog';
 import { FormsModule } from '@angular/forms';
+import { MessageService } from './message.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { FormsModule } from '@angular/forms';
     ModalDialogModule.forRoot(),
     FormsModule,
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,6 @@
 <br><br>
-<div class="row">
-    <div class="col-8">
+<div class="container row">
+    <div class="col">
           <form name="AgregarPrueba" id="Agregar" class="mt-5" #formvalidation='ngForm'>
         <div class="form-group">
              <label for="inputTitulo">Titulo del Juego</label>
@@ -58,8 +58,8 @@
         </div>
 </form>
     </div>
-    <div class="col-4">
-      <img alt= "" *ngIf="url_imagen" [(src)]="url_imagen" style="margin-top: 80px" width="350" height="350">
+    <div class="col-6 ml-5">
+      <img alt= "" *ngIf="url_imagen" [(src)]="url_imagen" style="margin-top: 80px" width="500" height="350">
     </div>
 </div>
 <!--

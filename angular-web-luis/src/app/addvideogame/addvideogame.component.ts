@@ -1,9 +1,8 @@
 import { Component, OnInit} from '@angular/core';
 import { DataService } from '../data.service';
 import {Videogame} from '../videogame';
-import { Guid } from 'guid-typescript';
 import { Location } from '@angular/common';
-import { createUrlResolverWithoutPackagePrefix } from '@angular/compiler';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-addvideogame',
@@ -21,11 +20,12 @@ export class AddvideogameComponent implements OnInit {
   clasificacion: string;
   url_imagen: string;
   bandera: boolean;
-  constructor(private dataservice: DataService, private location: Location) { }
+  constructor(private dataservice: DataService, private location: Location, private toasterService: MessageService) { }
 
   ngOnInit() {
     this.bandera = this.dataservice.esActualizar;
     if (this.dataservice.esActualizar === true) {
+      console.log(this.dataservice.videogameActualizar);
       this.dataservice.ActualizarTrue(this.dataservice.videogameActualizar).then( result => {
         this.id = result[0]._id;
         this.titulo = result[0].titulo_juego;
@@ -35,10 +35,10 @@ export class AddvideogameComponent implements OnInit {
         this.desarrollado = result[0].desarrolladora;
         this.clasificacion = result[0].clasificacion;
         this.url_imagen = result[0].url_imagen;
-        this.dataservice.esActualizar = false;
       }).catch((err) => {
-        console.log(err);
+        this.toasterService.Error(err);
       });
+      this.dataservice.esActualizar = false;
     } else {
       this.titulo = '';
       this.plataforma = '';
@@ -59,7 +59,11 @@ export class AddvideogameComponent implements OnInit {
       clasificacion: this.clasificacion,
       url_imagen: this.url_imagen
     };
-    this.dataservice.updateVideogame(this.id, obj);
+    this.dataservice.updateVideogame(this.id, obj).then( result => {
+      this.toasterService.Success(String(result));
+    }).catch((err) => {
+      this.toasterService.Error(err);
+    });
     this.dataservice.esActualizar = false;
     this.titulo = '';
     this.plataforma = '';
@@ -79,7 +83,11 @@ export class AddvideogameComponent implements OnInit {
       clasificacion: this.clasificacion,
       url_imagen: this.url_imagen
     };
-    this.dataservice.addVideogame(videogame);
+    this.dataservice.addVideogame(videogame).then( result => {
+       this.toasterService.Success(String(result));
+    }).catch((err) => {
+      this.toasterService.Error(err);
+    });
     this.dataservice.esActualizar = false;
     this.titulo = '';
     this.plataforma = '';
