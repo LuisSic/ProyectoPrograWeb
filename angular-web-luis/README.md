@@ -1,4 +1,4 @@
-# AngularWebLuis
+# Proyecto Angular 6
 
 Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) version 6.2.1.
 
