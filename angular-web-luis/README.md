@@ -48,7 +48,7 @@ docker image build -t <nombreimagen> .
 ```
 Con esto se creara una imagen del proyecto usando la configuracion que se encuentra en el dockerfile del proyecto.
 
-Si se esta utilizando docker para el proyecto, cabe resaltar que si el proyecto es editado y para ver reflejados los cambios, se debera generar nuevamente el build del proyecto y crear la imagen nuevamente.
+Si se esta utilizando docker para el proyecto, cabe resaltar que el proyecto al ser modificado se deberá generar nuevamente el build del proyecto y crear la imagen nuevamente. Esto permitirá visualizar los cambios realizados en la página web.
 
 ## Autor
 
