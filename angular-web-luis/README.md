@@ -1,27 +1,47 @@
 # AngularWebLuis
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.1.
+Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) version 6.2.1.
 
-## Development server
+## Getting Started
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Para correr el programa en su computadora debe tomar en cuenta lo siguiente:
 
-## Code scaffolding
+### Prerequisites
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Se debe contar con un editor de codigo para visualizar el proyecto, ya sea Sublime Text, Atom, para este caso recomiendo Visual Studio Code que es una poderosa herramienta.
 
-## Build
+Tambien se podria instalar docker en la computadora en el caso de que se quiera tener en contenedores el proyecto.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### Installing
 
-## Running unit tests
+En la consola del editor que se utilizando se debe ingresar a la carpeta angular-web-luis y ejecutar el siguiente comando, para instalar todas las dependencias del proyecto.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
+npm install 
+```
+En el archivo data.service.ts se debe colocar la url del api del proyecto.
 
-## Running end-to-end tests
+```
+baseURL: 'http://localhost:3000/videogame' 
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+### Development server
 
-## Further help
+Ejecute el comando `ng serve` en la cosola. Navegue hacia `http://localhost:4200/`. La pagina web estará corriendo en esa direccion url.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+### Build
+
+Ejecute el comando `ng build --prod` para hacer el build del proyecto. Se generará una carpeta `dist/angular-web-luis`.
+
+### Docker image
+
+Para crear una imagen del proyecto se debe ingresar a la carpeta `angular-web-luis` y ejecutar el siguiente comando.
+
+```
+docker image build -t <nombreimagen> .
+```
+Con esto se creara una imagen del proyecto usando la configuracion que se encuentra en el dockerfile del proyecto.
+
+Si se esta utilizando docker para el proyecto, cabe resaltar que si el proyecto es editado y para ver reflejados los cambios, se debera generar nuevamente el build del proyecto y crear la imagen nuevamente.
+
+

@@ -35,6 +35,9 @@ export class DataService {
         resolve(dictionary);
       })
       .catch(function (error) {
+        if(!error.response) {
+          return reject(error.message);
+        }
         console.log(error.response);
         if (error.response.status == 404 || error.response.status == 500) {
             reject(error.response.data.message);
@@ -53,6 +56,9 @@ export class DataService {
         resolve(response.data);
       })
       .catch(function (error) {
+        if(!error.response) {
+          return reject(error.message);
+        }
         console.log(error.response);
         if (error.response.status == 404 || error.response.data.status == 500) {
           reject(error.response.data.message);
@@ -72,6 +78,9 @@ export class DataService {
         resolve('Guardado Exitosamente');
       })
       .catch(function (error) {
+        if(!error.response) {
+          return reject(error.message);
+        }
         console.log(error.response);
         if (error.response.status == 404 || error.response.status == 500) {
           reject(error.response.data.message);
@@ -91,6 +100,9 @@ export class DataService {
         resolve('Eliminado Correctamente');
       })
       .catch(function (error) {
+        if(!error.response) {
+          return reject(error.message);
+        }
         console.log(error.response);
         if (error.response.status == 404 || error.response.status == 500) {
           reject(error.response.data.message);
@@ -110,6 +122,9 @@ export class DataService {
         resolve('Actualizado Correctamente');
       })
       .catch(function (error) {
+        if(!error.response) {
+          return reject(error.message);
+        }
         console.log(error.response);
         if (error.response.status === 404 || error.response.status === 500) {
           reject(error.response.data.message);
