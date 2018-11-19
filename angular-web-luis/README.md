@@ -14,6 +14,12 @@ Tambien se podria instalar docker en la computadora en el caso de que se quiera 
 
 ### Instalación
 
+Bajar el proyecto de git como se muestra a continuación
+
+```
+git clone https://github.com/LuisSic/ProyectoPrograWeb.git
+```
+
 En la consola del editor que se utilizando se debe ingresar a la carpeta angular-web-luis y ejecutar el siguiente comando, para instalar todas las dependencias del proyecto.
 
 ```
